@@ -1,4 +1,6 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable,
+     InternalServerErrorException, Logger, 
+     NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/users.entity';
@@ -19,9 +21,11 @@ export class UsersService {
       return await  this.userRepo.find();
     }
 
-   async findOneUser(id: any){
+   async findOneUser(id: string){
+    console.log("EL ID para buscar al usuario", id);
+    
         const user= await this.userRepo.findBy({id})
-        console.log("USER", user);
+        console.log("ENUENTR AUN USUARIO", user);
         
         return user;
     }
@@ -55,8 +59,6 @@ export class UsersService {
             
         } catch (error) {
             this.handelDBExceptions(error)
-            
-            
         }
 
     }

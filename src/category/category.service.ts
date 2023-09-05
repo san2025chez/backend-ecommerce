@@ -28,8 +28,11 @@ constructor(
     return await this.categoryRepository.find();
   }
 
- async findOneCategory( id: string) {
-    return await this.categoryRepository.findOneBy({id})
+ async findOneCategory( name: string) {
+    const category= await this.categoryRepository.find({where:{name:name}, relations:{product: true}})
+  console.log("cat en front",category[0].product);
+  
+    return category;
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {

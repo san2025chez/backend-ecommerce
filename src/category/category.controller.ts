@@ -1,16 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { ParseUUIDPipe } from '@nestjs/common';
 
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(private readonly categoryService: CategoryService) { }
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
-   const category= this.categoryService.createCategory(createCategoryDto);
-   
+    const category = this.categoryService.createCategory(createCategoryDto);
+    return category;
 
   }
 
@@ -21,7 +22,13 @@ export class CategoryController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.categoryService.findOneCategory(id);
+    const category = this.categoryService.findOneCategory(id);
+    console.log("DATA POR CATegoria",category);
+    
+    return category;
+
+    if (!category)
+      throw new NotFoundException(`Category ${id} not found`)
   }
 
   @Patch(':id')

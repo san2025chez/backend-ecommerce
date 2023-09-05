@@ -9,6 +9,8 @@ import {
 
 import { Category } from "../../category/entities/category.entity";
 import { Purchase } from "../../purchase/entities/purchase.entity";
+import { ProductImage } from "./product-image.entity";
+import { User } from '../../users/entities/users.entity';
 
 @Entity()
 export class Product {
@@ -36,12 +38,12 @@ export class Product {
     })
     price: number;
     //image
-/*     @OneToMany(
+    @OneToMany(
         () => ProductImage,
         (productImage) => productImage.product,
         { cascade: true, eager: true }
     )
-    images?: ProductImage[]; */
+    images?: ProductImage[];
 
     @ManyToOne(
         () => Category,
@@ -55,6 +57,13 @@ export class Product {
     (purchase: Purchase) => purchase.product)
   
     purchase: Purchase[]
+
+    @ManyToOne(
+        ()=> User,
+        (user)=> user.product,
+       { eager: true}
+    )
+    user: User
 
 
 }

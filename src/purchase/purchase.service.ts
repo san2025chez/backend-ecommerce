@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,6 +8,7 @@ import { Product } from '../products/entities/product.entity';
 import { ProductsService } from '../products/products.service';
 import { CreatePurchaseDtoFormat } from './dto/create-product-formato';
 import { UsersService } from '../users/services/users.service';
+
 
 @Injectable()
 export class PurchaseService {
@@ -20,38 +21,43 @@ constructor(
    {}
 
  async create(createPurchaseDto: CreatePurchaseDto) {
-    console.log("ingreso a crear");
+    console.log("ingreso a crear purchase");
     try {
    let {product} ={ ...createPurchaseDto} 
     createPurchaseDto.product=[];
     let payment: number;
     let responseProducts = await this.productsService.searchProducts(product)
-console.log(responseProducts);
+//console.log(responseProducts);
 for (let j = 0; j < responseProducts.length; j++) {
  payment= responseProducts[j]?.price * createPurchaseDto.quantity[j];
-  console.log("pago",payment
-  );
+
   
 }
-const newuser= await this.userService.findOneUser(createPurchaseDto.user)
-console.log("USER", newuser[0]);
+const newuser= await this.userService.findOneUser(createPurchaseDto.user.id)
+console.log("usuaro encontrado y retornado para el controller usuario", newuser);
+
 
 const productDto : CreatePurchaseDtoFormat={
   date: new Date(),
 
 product:responseProducts,
 
-user:  newuser[0],
+//user:  newuser[0],
 
-quantity: createPurchaseDto.quantity
+
+total: createPurchaseDto.total
 
 }
 //createPurchaseDto.product=responseProducts;
-const newpurchase= await this.purchaseRepository.create(productDto)
-this.purchaseRepository.save(newpurchase)
+const newpurchase= this.purchaseRepository.create(productDto)
+console.log("PURCHASE A GUARDAR", newpurchase);
 
-     // const purchase=  this.purchaseRepository.create(createPurchaseDto);
-     // await  this.purchaseRepository.save(purchase)
+
+
+await this.purchaseRepository.save(newpurchase)
+
+
+ 
       return newpurchase;
       
     } catch (error) {
@@ -63,7 +69,8 @@ this.purchaseRepository.save(newpurchase)
     if (error.code === '23505') {
       throw new BadRequestException(error.detail)
       this.logger.error(error);
-
+      throw new InternalServerErrorException('Unexpected error, check server logs');
+            
     }
   }
 
@@ -73,15 +80,22 @@ this.purchaseRepository.save(newpurchase)
     return await this.purchaseRepository.find({relations:['product']});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} purchase`;
+ async findOne(id: any) {
+  const purchase = await this.purchaseRepository.findOne({where:{id:id},relations:{product : true}});
+console.log("purchase encontrado en SErvice",purchase);
+
+  return purchase;
   }
 
+
+  remove(id: string) {
+    this.purchaseRepository.delete(id)
+   }
+  }
+/* 
   update(id: number, updatePurchaseDto: UpdatePurchaseDto) {
     return `This action updates a #${id} purchase`;
-  }
+  } */
 
-  remove(id: number) {
-    return `This action removes a #${id} purchase`;
-  }
-}
+  
+

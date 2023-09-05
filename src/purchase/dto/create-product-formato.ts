@@ -10,6 +10,8 @@ date: Date;
 product?: Product[];
 @IsOptional()
 user?:  User;
+
 @IsOptional()
-quantity: number[];
+total:number;
+
 }

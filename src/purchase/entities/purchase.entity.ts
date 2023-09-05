@@ -1,7 +1,9 @@
+
 import { Product } from "../../products/entities";
 import { User } from "../../users/entities/users.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { isGeneratorObject } from "util/types";
+import { Mercadopago } from '../../mercadopago/entities/mercadopago.entity';
 
 @Entity()
 export class Purchase {
@@ -11,23 +13,27 @@ export class Purchase {
     @Column({ type: Date, default: new Date, nullable: true })
     date: Date;
 
-    @Column('decimal', { precision: 10, scale: 2, nullable:true })
-    payment: number
+    @Column('decimal', { precision: 10, scale: 2, nullable: true })
+    total: number
 
     @ManyToMany(() => Product,
-     (product: Product) => product.purchase,{
-        cascade: true
-     })
+        (product: Product) => product.purchase,
+        {
+            cascade: true
+        })
     @JoinTable(
         {
-            name:'DETALLES',
-            joinColumns: [{ name:'purchaseId', referencedColumnName:'id'}],
-            inverseJoinColumns: [{name:'productId' , referencedColumnName:'id'}],
+            name: 'DETALLES',
+            joinColumns: [{ name: 'purchaseId', referencedColumnName: 'id' }],
+            inverseJoinColumns: [{ name: 'productId', referencedColumnName: 'id' }]
         }
     )
-    product: Product[];
+    product?: Product[];
 
     @OneToOne(() => User, (user) => user.purchase)
     user?: User;
+
+    @OneToOne(() => Mercadopago, (mercadopago) => mercadopago.purchase)
+    mercadopago?: Mercadopago;
 
 }

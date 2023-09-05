@@ -12,4 +12,6 @@ product?: string[];
 user?:  User;
 @IsOptional()
 quantity: number[];
+@IsOptional()
+total: number;
 }

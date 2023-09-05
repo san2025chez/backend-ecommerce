@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { UpdatePurchaseDto } from './dto/update-purchase.dto';
@@ -10,7 +10,7 @@ export class PurchaseController {
 
   @Post('create')
   create(@Body() createPurchaseDto: CreatePurchaseDto) {
-   console.log("ana");
+   console.log("ana ingresa a purchase");
    
     console.log("Controller crear purchase",createPurchaseDto);
     
@@ -22,18 +22,19 @@ export class PurchaseController {
     return this.purchaseService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.purchaseService.findOne(+id);
+ @Get(':id')
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    const productos=  this.purchaseService.findOne(id);
+  return productos;
   }
-
+/*  
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePurchaseDto: UpdatePurchaseDto) {
     return this.purchaseService.update(+id, updatePurchaseDto);
   }
-
+ */
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.purchaseService.remove(+id);
+  remove(@Param('id' , ParseUUIDPipe) id: string) {
+    return this.purchaseService.remove(id);
   }
 }

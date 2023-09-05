@@ -6,12 +6,15 @@ import { Purchase } from './entities/purchase.entity';
 import { Product } from '../products/entities';
 import { ProductsModule } from '../products/products.module';
 import { UsersModule } from '../users/users.module';
+import { MercadopagoModule } from '../mercadopago/mercadopago.module';
+
 @Module({
   imports:[
 TypeOrmModule.forFeature([Purchase]),
 ProductsModule, UsersModule],
   controllers: [PurchaseController],
   providers: [PurchaseService],
+  exports:[PurchaseService]
 
 })
 export class PurchaseModule {}
