@@ -28,8 +28,8 @@ export class MercadopagoService {
     console.log(process.env.ACCESS_TOKEN);
     
    
-    console.log("cartsssss que llegan al BACK",data);
-    orden= data.orden;
+    console.log("OCMPRUEBO  BACK LO QUE LLEGA PARA MERCADO PAGO",data);
+    orden= data.orden.id;
     /* 
       cart: [
     {
@@ -127,10 +127,10 @@ console.log( data.user.name,
                quantity: 1
              },
            ],*/
-          notification_url: "https://dbec-181-177-14-240.ngrok-free.app/api/mercadopago/webhook",
+          notification_url: "https://0e93-2803-cf00-7f4-2c00-ac9c-a9d9-80b1-6eb2.ngrok-free.app/api/mercadopago/webhook",
      // notification_url: "https://pagos-h22l.onrender.com/webhook",
         back_urls: {
-          success: "https://san2025chez.github.io/new-ecomerce/", 
+          success: "http://localhost:3001/", 
           // pending: "https://e720-190-237-16-208.sa.ngrok.io/pending",
           // failure: "https://e720-190-237-16-208.sa.ngrok.io/failure",
         },
@@ -185,8 +185,9 @@ console.log("ID PAY",id);
            }
           
            
+           console.log("lo que envio a CREAR EN BD",datapayment);
            
-
+/* 
 datapayment.purchase= {
   id:"5a51a4e0-0622-4ed3-af7e-aaa9a8cbfc3a",
 
@@ -196,7 +197,7 @@ datapayment.purchase= {
 
   total: 34
   
-}
+} */
          let pay= await  this.mercadoRepository.create(datapayment);
          console.log("lo que guardo", pay);
          

@@ -21,20 +21,22 @@ constructor(
    {}
 
  async create(createPurchaseDto: CreatePurchaseDto) {
-    console.log("ingreso a crear purchase");
+    console.log("ingreso a crear purchase", createPurchaseDto);
+
+    
     try {
    let {product} ={ ...createPurchaseDto} 
     createPurchaseDto.product=[];
     let payment: number;
-    let responseProducts = await this.productsService.searchProducts(product)
-//console.log(responseProducts);
-for (let j = 0; j < responseProducts.length; j++) {
+    let responseProducts=[] = await this.productsService.searchProducts(product)
+console.log("productos buscados",responseProducts);
+/* for (let j = 0; j < responseProducts.length; j++) {
  payment= responseProducts[j]?.price * createPurchaseDto.quantity[j];
 
   
 }
 const newuser= await this.userService.findOneUser(createPurchaseDto.user.id)
-console.log("usuaro encontrado y retornado para el controller usuario", newuser);
+console.log("usuaro encontrado y retornado para el controller usuario", newuser); */
 
 
 const productDto : CreatePurchaseDtoFormat={
@@ -48,6 +50,8 @@ product:responseProducts,
 total: createPurchaseDto.total
 
 }
+console.log("lo que voy a guardar", productDto);
+
 //createPurchaseDto.product=responseProducts;
 const newpurchase= this.purchaseRepository.create(productDto)
 console.log("PURCHASE A GUARDAR", newpurchase);

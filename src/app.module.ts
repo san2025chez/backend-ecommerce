@@ -15,7 +15,10 @@ import { MercadopagoModule } from './mercadopago/mercadopago.module';
 
 @Module({
   imports:[
-  ConfigModule.forRoot(),
+  ConfigModule.forRoot({
+    envFilePath:`.${process.env.NODE_ENV}.env`,
+    isGlobal:true
+  }),
   TypeOrmModule.forRoot({
     type:'postgres',
     host: process.env.DB_HOST,
