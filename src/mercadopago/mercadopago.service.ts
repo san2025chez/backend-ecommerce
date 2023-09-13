@@ -22,14 +22,15 @@ export class MercadopagoService {
     private mercadoRepository: Repository<Mercadopago>,
 
     private purchaseService: PurchaseService
-  ){}
+ ){}
 
  async create(data: any) {
     console.log(process.env.ACCESS_TOKEN);
     
    
-    console.log("OCMPRUEBO  BACK LO QUE LLEGA PARA MERCADO PAGO",data);
-    orden= data.orden.id;
+    console.log("cartsssss que llegan al BACK",data);
+    orden= data.orden;
+
     /* 
       cart: [
     {
@@ -127,10 +128,16 @@ console.log( data.user.name,
                quantity: 1
              },
            ],*/
+<<<<<<< HEAD
           notification_url: "https://8890-2803-cf00-7f4-2c00-60d4-8ca2-d0ea-b219.ngrok-free.app/api/mercadopago/webhook",
+=======
+
+          notification_url: "https://dbec-181-177-14-240.ngrok-free.app/api/mercadopago/webhook",
+>>>>>>> 7313c96cc747db1fcdf3509cf062321a27a0a343
      // notification_url: "https://pagos-h22l.onrender.com/webhook",
         back_urls: {
-          success: "http://localhost:3001/", 
+          success: "https://san2025chez.github.io/new-ecomerce/", 
+
           // pending: "https://e720-190-237-16-208.sa.ngrok.io/pending",
           // failure: "https://e720-190-237-16-208.sa.ngrok.io/failure",
         },
@@ -185,9 +192,6 @@ console.log("ID PAY",id);
            }
           
            
-           console.log("lo que envio a CREAR EN BD",datapayment);
-           
-/* 
 datapayment.purchase= {
   id:"5a51a4e0-0622-4ed3-af7e-aaa9a8cbfc3a",
 
@@ -197,8 +201,9 @@ datapayment.purchase= {
 
   total: 34
   
-} */
-         let pay= await  this.mercadoRepository.create(datapayment);
+}
+
+        let pay= await  this.mercadoRepository.create(datapayment);
          console.log("lo que guardo", pay);
          
            this.mercadoRepository.save(pay)
