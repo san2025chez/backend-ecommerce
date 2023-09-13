@@ -127,7 +127,7 @@ console.log( data.user.name,
                quantity: 1
              },
            ],*/
-          notification_url: "https://0e93-2803-cf00-7f4-2c00-ac9c-a9d9-80b1-6eb2.ngrok-free.app/api/mercadopago/webhook",
+          notification_url: "https://8890-2803-cf00-7f4-2c00-60d4-8ca2-d0ea-b219.ngrok-free.app/api/mercadopago/webhook",
      // notification_url: "https://pagos-h22l.onrender.com/webhook",
         back_urls: {
           success: "http://localhost:3001/", 
