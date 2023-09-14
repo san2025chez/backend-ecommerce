@@ -10,7 +10,7 @@ export class PurchaseController {
 
   @Post('create')
   create(@Body() createPurchaseDto: CreatePurchaseDto) {
-   console.log("ana ingresa a purchase");
+
    
     console.log("Controller crear purchase",createPurchaseDto);
     

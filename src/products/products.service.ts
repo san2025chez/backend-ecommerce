@@ -134,8 +134,9 @@ user,
     for (let i = 0; i < ids.length; i++) {
  
       
-      //return await this.productRepository.findOneBy({`${ids[i]}`});
+
       let product = await this.findOne(ids[i]);
+    
 products.push(product)
     console.log("array",products);
     }
