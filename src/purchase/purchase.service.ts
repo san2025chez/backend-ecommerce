@@ -84,7 +84,8 @@ await this.purchaseRepository.save(newpurchase)
     return await this.purchaseRepository.find({relations:['product']});
   }
 
- async findOne(id: any) {
+ async findOne(id: any){
+  
   const purchase = await this.purchaseRepository.findOne({where:{id:id},relations:{product : true}});
 console.log("purchase encontrado en SErvice",purchase);
 

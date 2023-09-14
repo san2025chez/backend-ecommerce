@@ -11,7 +11,7 @@ import { PurchaseService } from '../purchase/purchase.service';
 
 
 var mercadopago = require('mercadopago');
-var orden='';
+var orden: Purchase;
 
 @Injectable()
 export class MercadopagoService {
@@ -128,15 +128,11 @@ console.log( data.user.name,
                quantity: 1
              },
            ],*/
-<<<<<<< HEAD
-          notification_url: "https://8890-2803-cf00-7f4-2c00-60d4-8ca2-d0ea-b219.ngrok-free.app/api/mercadopago/webhook",
-=======
 
-          notification_url: "https://dbec-181-177-14-240.ngrok-free.app/api/mercadopago/webhook",
->>>>>>> 7313c96cc747db1fcdf3509cf062321a27a0a343
+          notification_url: "https://productosnutricionales.online/api/mercadopago/webhook",
      // notification_url: "https://pagos-h22l.onrender.com/webhook",
         back_urls: {
-          success: "https://san2025chez.github.io/new-ecomerce/", 
+          success: "https://productosnutricionales.online", 
 
           // pending: "https://e720-190-237-16-208.sa.ngrok.io/pending",
           // failure: "https://e720-190-237-16-208.sa.ngrok.io/failure",
@@ -184,24 +180,16 @@ console.log("ID PAY",id);
            let datapayment: CreatePayDto={
 
             status: dataMp.body.status_detail,
+            purchase: orden,
     
-            purchase:  await this.purchaseService.findOne(orden),
+         /*    purchase: this.purchaseService.findOne(orden.id), */
             fecha: new Date()
 
 
            }
           
            
-datapayment.purchase= {
-  id:"5a51a4e0-0622-4ed3-af7e-aaa9a8cbfc3a",
 
-
-  date: new Date(),
-
-
-  total: 34
-  
-}
 
         let pay= await  this.mercadoRepository.create(datapayment);
          console.log("lo que guardo", pay);
