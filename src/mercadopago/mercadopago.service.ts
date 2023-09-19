@@ -94,7 +94,7 @@ let arrayProduct=[];
     });
 
 console.log("COMPRUEBO LO QUE ENVIO",arrayProduct);
-console.log( data.user.name,
+console.log( data.orden.user.name,
   data.orden.user.surname,
  data.orden.user.email,
  data.orden.user.phone);
