@@ -1,7 +1,7 @@
 
 import { Product } from "../../products/entities";
 import { User } from "../../users/entities/users.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { isGeneratorObject } from "util/types";
 import { Mercadopago } from '../../mercadopago/entities/mercadopago.entity';
 
@@ -30,7 +30,7 @@ export class Purchase {
     )
     product?: Product[];
 
-    @OneToOne(() => User, (user) => user.purchase)
+    @ManyToOne(() => User, (user) => user.purchase)
     user?: User;
 
     @OneToOne(() => Mercadopago, (mercadopago) => mercadopago.purchase)

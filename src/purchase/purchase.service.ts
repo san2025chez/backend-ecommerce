@@ -34,17 +34,17 @@ console.log("productos buscados",responseProducts);
  payment= responseProducts[j]?.price * createPurchaseDto.quantity[j];
 
   
-}
-const newuser= await this.userService.findOneUser(createPurchaseDto.user.id)
-console.log("usuaro encontrado y retornado para el controller usuario", newuser); */
-
+} */
+/* const newuser= await this.userService.findOneUser(createPurchaseDto.user.id)
+console.log("usuaro encontrado y retornado para el controller usuario", newuser);
+ */
 
 const productDto : CreatePurchaseDtoFormat={
   date: new Date(),
 
 product:responseProducts,
 
-//user:  newuser[0],
+user:  createPurchaseDto.user,
 
 
 total: createPurchaseDto.total
@@ -86,7 +86,10 @@ await this.purchaseRepository.save(newpurchase)
 
  async findOne(id: any){
   
-  const purchase = await this.purchaseRepository.findOne({where:{id:id},relations:{product : true}});
+  const purchase = await this.purchaseRepository.findOne({
+    where:{id:id},
+    relations:['product','user']
+  });
 console.log("purchase encontrado en SErvice",purchase);
 
   return purchase;

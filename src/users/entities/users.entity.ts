@@ -1,5 +1,5 @@
 import { Purchase } from '../../purchase/entities/purchase.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, BeforeInsert, BeforeUpdate, OneToMany, ManyToOne } from 'typeorm'
 import { Product } from '../../products/entities/product.entity';
 
 @Entity()
@@ -74,7 +74,7 @@ export class User {
         this.checkFieldsBeforeInsert();
     }
 
-    @OneToOne(() => Purchase, (purchase) => purchase.user)
+    @OneToMany(() => Purchase, (purchase) => purchase.user)
     purchase?: Purchase
 
     @OneToMany(

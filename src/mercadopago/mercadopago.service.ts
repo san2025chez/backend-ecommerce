@@ -25,7 +25,7 @@ export class MercadopagoService {
  ){}
 
  async create(data: any) {
-    console.log(process.env.ACCESS_TOKEN);
+   
     
    
     console.log("cartsssss que llegan al BACK",data);
@@ -88,15 +88,16 @@ let arrayProduct=[];
    console.log("CARTS",typeof(dats.cart));
     */
 
+ 
     mercadopago.configure({
-      access_token: "TEST-7234572348192236-060309-ef666eb113bab9517379859d6f474bc4-1390122826"
+      access_token: process.env.TEST
     });
 
 console.log("COMPRUEBO LO QUE ENVIO",arrayProduct);
 console.log( data.user.name,
-  data.user.surname,
- data.user.email,
- data.user.phone);
+  data.orden.user.surname,
+ data.orden.user.email,
+ data.orden.user.phone);
 
 
 
@@ -105,12 +106,12 @@ console.log( data.user.name,
       const result = await mercadopago.preferences.create({
         items: arrayProduct,
         payer: {
-          name: data.user.name,
-          surname: data.user.surname,
-          email: data.user.email,
+          name: data.orden.user.name,
+          surname: data.orden.user.surname,
+          email: data.orden.user.email,
           phone: {
             area_code: "54",
-            number: Number(data.user.phone)
+            number: Number(data.orden.user.phone)
           },
         },
         payment_methods: {

@@ -23,13 +23,13 @@ export class ProductsService {
     private readonly dataSource: DataSource,
   ) { }
 
-  async create(createProductDto: CreateProductDto, user: User) {
+  async create(createProductDto: CreateProductDto) {
     try {
       const { images =[], ...productDetails } = createProductDto;
 
       const product = this.productRepository.create({
         ...productDetails,
-user,
+
        images: images.map(image => this.productImageRepository.create({ url: image }),
       )
       });
