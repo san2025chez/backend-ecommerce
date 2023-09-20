@@ -98,12 +98,12 @@ let arrayProduct=[];
       const result = await mercadopago.preferences.create({
         items: arrayProduct,
         payer: {
-          name: data.orden.user.name,
-          surname: data.orden.user.surname,
-          email: data.orden.user.email,
+          name: data?.orden?.user.name,
+          surname: data?.orden?.user.surname,
+          email: data?.orden?.user.email,
           phone: {
             area_code: "54",
-            number: Number(data.orden.user.phone)
+            number: Number(data?.orden?.user.phone)
           },
         },
         payment_methods: {
