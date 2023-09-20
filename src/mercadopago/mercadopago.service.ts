@@ -93,14 +93,6 @@ let arrayProduct=[];
       access_token: process.env.TEST
     });
 
-console.log("COMPRUEBO LO QUE ENVIO",arrayProduct);
-console.log( data.orden.user.name,
-  data.orden.user.surname,
- data.orden.user.email,
- data.orden.user.phone);
-
-
-
 
     try {
       const result = await mercadopago.preferences.create({
