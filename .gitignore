@@ -5,6 +5,8 @@
 /postgres
 .develop.env
 .production.env
+docker-compose.yml
+Dockerfile
 
 #Productos API
 1. Clonar Proyecto
