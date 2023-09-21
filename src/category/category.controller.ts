@@ -23,7 +23,7 @@ export class CategoryController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     const category = this.categoryService.findOneCategory(id);
-    console.log("DATA POR CATegoria",category);
+
     
     return category;
 
@@ -38,6 +38,8 @@ export class CategoryController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+    console.log("ingreso a eliminar categoria", id);
+    
+    return this.categoryService.remove(id);
   }
 }

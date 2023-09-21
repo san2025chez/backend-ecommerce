@@ -30,7 +30,7 @@ constructor(
 
  async findOneCategory( name: string) {
     const category= await this.categoryRepository.find({where:{name:name}, relations:{product: true}})
-  console.log("cat en front",category[0].product);
+
   
     return category;
   }
@@ -39,7 +39,7 @@ constructor(
     return `This action updates a #${id} category`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string) {
+    await this.categoryRepository.delete(id)
   }
 }

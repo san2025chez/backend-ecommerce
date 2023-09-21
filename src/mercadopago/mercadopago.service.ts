@@ -95,6 +95,7 @@ let arrayProduct=[];
 
 
     try {
+      if (data && data.orden) {
       const result = await mercadopago.preferences.create({
         items: arrayProduct,
         payer: {
@@ -110,33 +111,24 @@ let arrayProduct=[];
   
           installments: 1
         }, 
-        /*    items: [
-             {
-        
-               currency_id: 'ARS',
-               
-               title: 'Thermogen',
-            
-               unit_price: 26,
-               quantity: 1
-             },
-           ],*/
+      
 
           notification_url: "https://productosnutricionales.online/api/mercadopago/webhook",
-     // notification_url: "https://pagos-h22l.onrender.com/webhook",
+    
         back_urls: {
           success: "https://productosnutricionales.online", 
 
-          // pending: "https://e720-190-237-16-208.sa.ngrok.io/pending",
-          // failure: "https://e720-190-237-16-208.sa.ngrok.io/failure",
+        
         },
      });
+   
   
 /*   console.log("veo resultado",JSON.stringify(result.body)); */
   
   return JSON.stringify(result.body)
       // res.json({ message: "Payment creted" });
      // res.json(result.body);
+    }
       
     } catch (error) {
       console.log("ingreso por aqui");
