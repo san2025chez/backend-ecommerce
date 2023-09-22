@@ -90,7 +90,7 @@ let arrayProduct=[];
 
  
     mercadopago.configure({
-      access_token: process.env.TEST
+      access_token: process.env.ACCESS_TOKEN
     });
 
 
