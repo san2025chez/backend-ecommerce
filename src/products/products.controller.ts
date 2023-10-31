@@ -5,19 +5,18 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { Auth } from '../auth/decorators/auth.decorators';
 import { ValidRoles } from '../auth/interfaces';
-import { User } from '../users/entities/users.entity';
-import { GetUser } from '../auth/decorators';
+
 
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductsService) { }
 
   @Post()
-/*   @Auth() */
+  /*   @Auth() */
 
   create(@Body() createProductDto: CreateProductDto,
- // @GetUser() user: User
-) {
+    // @GetUser() user: User
+  ) {
     return this.productsService.create(createProductDto);
   }
 
@@ -26,23 +25,34 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    const product =  await this.productsService.findOne(id);
+  @Get(':name')
+  async findOne(@Param('name') name: string) {
+    let product;
+   product = await this.productsService.findOneByName(name);
+    if (!product)
+      throw new NotFoundException(`Product with id ${name} not found`)
     return product;
-    if(!product)
-    throw new NotFoundException(`Product with id ${ id} not found` )
   }
+
+  @Get('/prod/:id')
+  async findOnebyId(@Param('id', ParseUUIDPipe) id: string) {
+    let product;
+   product = await this.productsService.findOne(id);
+    if (!product)
+      throw new NotFoundException(`Product with id ${id} not found`)
+    return product;
+  }
+
 
   @Patch(':id')
   update(
-    @Param('id',ParseUUIDPipe) id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
-  /*   @GetUser() user:User */
+    /*   @GetUser() user:User */
 
-    ) {
-      console.log("ingreso a update");
-      
+  ) {
+    console.log("ingreso a update");
+
     return this.productsService.update(id, updateProductDto);
   }
 

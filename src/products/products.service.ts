@@ -7,6 +7,7 @@ import { PaginationDto } from '../common/dtos/pagination.dto';
 import { ProductImage  } from './entities';
 import { Product } from './entities/product.entity';
 import { User } from '../users/entities/users.entity';
+import { ILike } from 'typeorm';
 
 
 @Injectable()
@@ -65,10 +66,28 @@ export class ProductsService {
   }
 
   async findOne(id: string) {
-    const product= await this.productRepository.findOneBy({ id });
-  console.log("ONE",product);
+    console.log("service",id);
+    
+    let product = await this.productRepository.findOneBy({ id});
+ 
+
   
     return product;
+  }
+
+  async findOneByName(searchTerm: string) {
+    console.log("Ingresé aquí", searchTerm);
+    const products = await this.productRepository.find({
+      where: {
+       
+          name: ILike(`%${searchTerm}%`), // Usamos '% palabra %' para buscar productos que contienen la palabra
+       
+      },
+    });
+  
+    console.log("Productos encontrados:", products);
+  
+    return products;
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
@@ -103,7 +122,7 @@ export class ProductsService {
         await queryRunner.release();
        
         return product;
-        // return await this.productRepository.save(product)
+       // return await this.productRepository.save(product)
       
     } catch (error) {
 

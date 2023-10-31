@@ -90,7 +90,7 @@ let arrayProduct=[];
 
  
     mercadopago.configure({
-      access_token: process.env.ACCESS_TOKEN
+      access_token: process.env.TEST
     });
 
 
@@ -113,7 +113,7 @@ let arrayProduct=[];
         }, 
       
 
-          notification_url: "https://productosnutricionales.online/api/mercadopago/webhook",
+          notification_url: "https://738c-2803-cf00-7f4-2c00-346d-9d8c-939-ef6a.ngrok-free.app/api/mercadopago/webhook",
     
         back_urls: {
           success: "https://productosnutricionales.online", 
