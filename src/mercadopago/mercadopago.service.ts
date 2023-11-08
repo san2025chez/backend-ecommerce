@@ -71,8 +71,6 @@ export class MercadopagoService {
 
           back_urls: {
             success: "https://productosnutricionales.online",
-
-
           },
         });
 
