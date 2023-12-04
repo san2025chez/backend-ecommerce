@@ -34,7 +34,7 @@ export class ProductsController {
     return product;
   }
 
-  @Get('git:id')
+  @Get('prod/:id')
   async findOnebyId(@Param('id', ParseUUIDPipe) id: string) {
     let product;
    product = await this.productsService.findOne(id);
