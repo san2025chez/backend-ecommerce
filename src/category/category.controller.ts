@@ -38,8 +38,6 @@ export class CategoryController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    console.log("ingreso a eliminar categoria", id);
-    
     return this.categoryService.remove(id);
   }
 }

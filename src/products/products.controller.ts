@@ -34,7 +34,7 @@ export class ProductsController {
     return product;
   }
 
-  @Get('/prod/:id')
+  @Get('prod/:id')
   async findOnebyId(@Param('id', ParseUUIDPipe) id: string) {
     let product;
    product = await this.productsService.findOne(id);
@@ -48,10 +48,8 @@ export class ProductsController {
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
-    /*   @GetUser() user:User */
-
   ) {
-    console.log("ingreso a update");
+
 
     return this.productsService.update(id, updateProductDto);
   }

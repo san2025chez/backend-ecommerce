@@ -64,9 +64,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Vanesa Sanchez](https://github.com/san2025chez)
+- Website - [Link de pagina](https://productosnutricionales.com.ar/)
 
 ## License
 

@@ -9,15 +9,11 @@ export class MercadopagoController {
 
   @Post()
   create(@Body() createMercadopagoDto: any) {
-    console.log("ingreso a crear",createMercadopagoDto
-    );
-    
     return this.mercadopagoService.create(createMercadopagoDto);
   }
 
    @Post('/webhook')
   createpayments(@Body() data: any) {
-    console.log("ingreso a webhook");
     
     return this.mercadopagoService.receiveWebhook(data);
   }
