@@ -12,61 +12,51 @@ import { UsersService } from '../users/services/users.service';
 
 @Injectable()
 export class PurchaseService {
-  private readonly logger= new Logger('PurchaseService')
-constructor( 
-   @InjectRepository(Purchase) 
-   private purchaseRepository: Repository<Purchase>,
-   private productsService: ProductsService,
-   private userService: UsersService)
-   {}
+  private readonly logger = new Logger('PurchaseService')
+  constructor(
+    @InjectRepository(Purchase)
+    private purchaseRepository: Repository<Purchase>,
+    private productsService: ProductsService,
+    private userService: UsersService) { }
 
- async create(createPurchaseDto: CreatePurchaseDto) {
-    console.log("ingreso a crear purchase", createPurchaseDto);
+  async create(createPurchaseDto: CreatePurchaseDto) {
 
-    
     try {
-   let {product} ={ ...createPurchaseDto} 
-    createPurchaseDto.product=[];
-    let payment: number;
-    let responseProducts=[] = await this.productsService.searchProducts(product)
-console.log("productos buscados",responseProducts);
-/* for (let j = 0; j < responseProducts.length; j++) {
- payment= responseProducts[j]?.price * createPurchaseDto.quantity[j];
-
-  
-} */
-/* const newuser= await this.userService.findOneUser(createPurchaseDto.user.id)
-console.log("usuaro encontrado y retornado para el controller usuario", newuser);
- */
-
-const productDto : CreatePurchaseDtoFormat={
-  date: new Date(),
-
-product:responseProducts,
-
-user:  createPurchaseDto.user,
-
-
-total: createPurchaseDto.total
-
-}
-console.log("lo que voy a guardar", productDto);
-
-//createPurchaseDto.product=responseProducts;
-const newpurchase= this.purchaseRepository.create(productDto)
-console.log("PURCHASE A GUARDAR", newpurchase);
+      let { product } = { ...createPurchaseDto }
+      createPurchaseDto.product = [];
+      let payment: number;
+      let responseProducts = [] = await this.productsService.searchProducts(product)
 
 
 
-await this.purchaseRepository.save(newpurchase)
+      const productDto: CreatePurchaseDtoFormat = {
+        date: new Date(),
+
+        product: responseProducts,
+
+        user: createPurchaseDto.user,
 
 
- 
+        total: createPurchaseDto.total
+
+      }
+
+
+      //createPurchaseDto.product=responseProducts;
+      const newpurchase = this.purchaseRepository.create(productDto)
+
+
+
+
+      await this.purchaseRepository.save(newpurchase)
+
+
+
       return newpurchase;
-      
+
     } catch (error) {
       this.handleDBExeptions(error)
-      
+
     }
   }
   private handleDBExeptions(error: any) {
@@ -74,36 +64,33 @@ await this.purchaseRepository.save(newpurchase)
       throw new BadRequestException(error.detail)
       this.logger.error(error);
       throw new InternalServerErrorException('Unexpected error, check server logs');
-            
+
     }
   }
 
   async findAll() {
-    console.log("ingreso a service");
-    
-    return await this.purchaseRepository.find({relations:['product']});
+
+
+    return await this.purchaseRepository.find({ relations: ['product'] });
   }
 
- async findOne(id: any){
-  
-  const purchase = await this.purchaseRepository.findOne({
-    where:{id:id},
-    relations:['product','user']
-  });
-console.log("purchase encontrado en SErvice",purchase);
+  async findOne(id: any) {
 
-  return purchase;
+    const purchase = await this.purchaseRepository.findOne({
+      where: { id: id },
+      relations: ['product', 'user']
+    });
+
+
+    return purchase;
   }
 
 
   remove(id: string) {
     this.purchaseRepository.delete(id)
-   }
   }
-/* 
-  update(id: number, updatePurchaseDto: UpdatePurchaseDto) {
-    return `This action updates a #${id} purchase`;
-  } */
+}
 
-  
+
+
 

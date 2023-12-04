@@ -35,14 +35,7 @@ constructor(
 
    if(!user.isActive)
    throw new UnauthorizedException('User is inactive, talk with an admin');
-console.log("USER VALIDATE",user);
-
    return user;
-
-
-
-
-    
     }
 
 }

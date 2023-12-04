@@ -48,10 +48,8 @@ export class ProductsController {
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
-    /*   @GetUser() user:User */
-
   ) {
-    console.log("ingreso a update");
+
 
     return this.productsService.update(id, updateProductDto);
   }

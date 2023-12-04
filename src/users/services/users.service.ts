@@ -22,11 +22,8 @@ export class UsersService {
     }
 
    async findOneUser(id: string){
-    console.log("EL ID para buscar al usuario", id);
-    
-        const user= await this.userRepo.findBy({id})
-        console.log("ENUENTR AUN USUARIO", user);
-        
+            const user= await this.userRepo.findBy({id})
+          
         return user;
     }
 

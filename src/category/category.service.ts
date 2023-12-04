@@ -16,8 +16,6 @@ constructor(
 
  async  createCategory(createCategoryDto: CreateCategoryDto) {
     const category = await this.categoryRepository.create(createCategoryDto)
-
-    console.log("veo categoria",category);
     
     await this.categoryRepository.save(category);
     return category;

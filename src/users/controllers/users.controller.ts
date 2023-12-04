@@ -10,7 +10,6 @@ export class UsersController {
 
     @Post()
     create(@Body() createUserDto: CreateUserDto){
-        console.log("create");
         
         return this.usersService.create(createUserDto)
     }
@@ -23,10 +22,8 @@ export class UsersController {
 
     @Get('/:id')
     findOne(@Param('id', ParseUUIDPipe) id: string) {
-        console.log("ingreso por id", id);
-        
-     
-      return this.usersService.findOneUser(id)
+       
+        return this.usersService.findOneUser(id)
     }
 
     @Delete('/:id')

@@ -79,7 +79,6 @@ export class MercadopagoService {
       }
 
     } catch (error) {
-      console.log("ingreso por aqui");
 
       console.log(error);
 
@@ -89,24 +88,16 @@ export class MercadopagoService {
   }
 
   receiveWebhook = async (req) => {
-    console.log("lo que llega de webhook query", req.query);
-    console.log("lo que llega de webhook", req);
+
 
 
     try {
       const payment = req;
-      console.log("pagos", payment);
-      console.log("pagos type", payment.type);
-      console.log("pagos data", payment["data.id"]);
-      console.log("pagos datasss forzado", payment["data"]);
-
+     
       if (payment.type === "payment") {
-        console.log("ingreso");
+    
         let id = payment.data.id;
-        console.log("ID PAY", id);
-
-
-        const dataMp = await mercadopago.payment.findById(id);
+              const dataMp = await mercadopago.payment.findById(id);
 
         let datapayment: CreatePayDto = {
 
@@ -118,7 +109,7 @@ export class MercadopagoService {
         }
 
         let pay = await this.mercadoRepository.create(datapayment);
-        console.log("lo que guardo", pay);
+    
 
         this.mercadoRepository.save(pay)
 
@@ -126,7 +117,7 @@ export class MercadopagoService {
 
 
     } catch (error) {
-      console.log(error);
+
     }
   };
 
