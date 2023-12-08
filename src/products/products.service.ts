@@ -53,16 +53,15 @@ export class ProductsService {
     const products = await this.productRepository.find({
       //take: limit,
       //skip: offset,
-      relations: {
-        images: true,
-      }
+      relations: 
+         ['images', 'category']
     });
+return products;
 
-
-    return products.map((product) => ({
+    /* return products.map((product) => ({
       ...product,
       images: product.images.map(img => img.url)
-    }))
+    })) */
   }
 
   async findOne(id: string) {

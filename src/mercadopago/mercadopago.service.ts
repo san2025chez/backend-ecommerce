@@ -70,7 +70,7 @@ export class MercadopagoService {
           notification_url: "https://productosnutricionales.online/api/mercadopago/webhook",
 
           back_urls: {
-            success: "https://productosnutricionales.online",
+            success: "https://productosnutricionales.com.ar",
           },
         });
 
