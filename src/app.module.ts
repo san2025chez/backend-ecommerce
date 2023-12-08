@@ -11,7 +11,8 @@ import { PurchaseController } from './purchase/purchase.controller';
 import { loggers } from '../midleware/midleware';
 import { AuthModule } from './auth/auth.module';
 import { MercadopagoModule } from './mercadopago/mercadopago.module';
-
+console.log("tipo",typeof(process.env.DB_PASSWORD));
+  
 
 @Module({
   imports:[
@@ -19,6 +20,7 @@ import { MercadopagoModule } from './mercadopago/mercadopago.module';
     envFilePath:`.${process.env.NODE_ENV}.env`,
     isGlobal:true
   }),
+
   TypeOrmModule.forRoot({
     type:'postgres',
     host: process.env.DB_HOST,
