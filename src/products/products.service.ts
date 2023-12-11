@@ -66,10 +66,7 @@ return products;
 
   async findOne(id: string) {
 
-    let product = await this.productRepository.findOneBy({ id });
-
-
-
+    let product = await this.productRepository.findOneBy({id});
     return product;
   }
 
@@ -89,8 +86,6 @@ return products;
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
-
-
 
     const { images, ...toUpdate } = updateProductDto;
     const product = await this.productRepository.preload({ id, ...toUpdate });
@@ -119,8 +114,8 @@ return products;
       await queryRunner.commitTransaction();
       await queryRunner.release();
 
-      return product;
-      // return await this.productRepository.save(product)
+      //return product;
+     return await this.productRepository.save(product)
 
     } catch (error) {
 

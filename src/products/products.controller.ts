@@ -44,13 +44,11 @@ export class ProductsController {
   }
 
 
-  @Patch(':id')
+  @Patch('/prod/:id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-
-
     return this.productsService.update(id, updateProductDto);
   }
 

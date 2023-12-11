@@ -1,5 +1,6 @@
 import {
     Column, Entity,
+    JoinColumn,
     JoinTable,
     ManyToMany,
     ManyToOne,
@@ -51,6 +52,7 @@ export class Product {
          {onDelete: 'CASCADE'}
     
         )
+    @JoinColumn({ name: 'category_id' })
     category: Category;
 
     @ManyToMany(() => Purchase,
