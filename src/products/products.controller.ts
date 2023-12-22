@@ -49,6 +49,7 @@ export class ProductsController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
   ) {
+    console.log("ingso a acuaizar");
     return this.productsService.update(id, updateProductDto);
   }
 
