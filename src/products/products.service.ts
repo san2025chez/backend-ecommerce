@@ -86,6 +86,7 @@ return products;
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
+console.log("legga a service",updateProductDto);
 
     const { images, ...toUpdate } = updateProductDto;
     const product = await this.productRepository.preload({ id, ...toUpdate });
@@ -115,7 +116,8 @@ return products;
       await queryRunner.release();
 
       //return product;
-     return await this.productRepository.save(product)
+    const updateProduct= await this.productRepository.save(product)
+    return updateProduct;
 
     } catch (error) {
 
